@@ -62,10 +62,10 @@ def get_db_url() -> str:
         pass
 
     user = str(secret_user or os.getenv("AUDITORIA_DB_USER", "postgres"))
-    password = str(secret_pass or os.getenv("AUDITORIA_DB_PASS", "blsks25"))
-    host = str(secret_host or os.getenv("AUDITORIA_DB_HOST", "192.168.0.24"))
-    port = int(secret_port or os.getenv("AUDITORIA_DB_PORT", "5432"))
-    database = str(secret_db or os.getenv("AUDITORIA_DB_NAME", "blue_raw"))
+    password = str(secret_pass or os.getenv("AUDITORIA_DB_PASS", "AApgKSLEDBJzbYaMiNCGVaXcisiIXrII"))
+    host = str(secret_host or os.getenv("AUDITORIA_DB_HOST", "tokaido.proxy.rlwy.net"))
+    port = int(secret_port or os.getenv("AUDITORIA_DB_PORT", "27106"))
+    database = str(secret_db or os.getenv("AUDITORIA_DB_NAME", "railway"))
 
     has_explicit_components = any(
         [
