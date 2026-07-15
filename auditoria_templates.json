@@ -1,0 +1,701 @@
+{
+  "areas_analisadas": [
+    "SELECAO",
+    "RECEBIMENTO",
+    "LOW RISK",
+    "HIGH CARE",
+    "RESIDUO",
+    "ETIQUETA",
+    "EXPEDICAO",
+    "ALMOXARIFADO",
+    "LAVANDERIA",
+    "MANUTENCAO",
+    "ETE / ETA",
+    "ADMINISTRATIVOS"
+  ],
+  "tipos": [
+    {
+      "name": "AUDITORIA MA",
+      "departamentos": [
+        "SELECAO",
+        "RECEBIMENTO",
+        "LOW RISK",
+        "HIGH CARE",
+        "RESIDUO",
+        "ETIQUETA",
+        "EXPEDICAO",
+        "ALMOXARIFADO",
+        "LAVANDERIA",
+        "MANUTENCAO",
+        "ETE / ETA",
+        "ADMINISTRATIVOS"
+      ],
+      "itens": [
+        {
+          "item": "1",
+          "referencia": "Descarte",
+          "requisito": "É realizada a segregação de materiais como: sucatas, papelão, plástico, lâmpadas, e orgânicos ?"
+        },
+        {
+          "item": "2",
+          "referencia": "Descarte",
+          "requisito": "Lixeiras devidamente identificadas conforme o resíduo gerado no setor ?"
+        },
+        {
+          "item": "4",
+          "referencia": "Descarte",
+          "requisito": "Recipientes apropriados para descarte de material contaminado. Ex: panos com sujidades de graxas e óleos."
+        },
+        {
+          "item": "5",
+          "referencia": "Descarte",
+          "requisito": "tambores ou lixeiras devidamente identificadas para descarte de kit de emergência ambiental"
+        },
+        {
+          "item": "6",
+          "referencia": "Contaminação",
+          "requisito": "Proi"
+        },
+        {
+          "item": "7",
+          "referencia": "Descarte",
+          "requisito": "Produtos quimicos vencidos e/ou bombonas vazias estão segregadas de forma adequada ?"
+        },
+        {
+          "item": "8",
+          "referencia": "Solo-uso",
+          "requisito": "Ausência de resíduos sólidos no chão da empresa."
+        },
+        {
+          "item": "9",
+          "referencia": "Solo-uso",
+          "requisito": "Ausência de resíduos líquidos no chão da empresa."
+        },
+        {
+          "item": "10",
+          "referencia": "Ar-uso",
+          "requisito": "Ausência de pó em suspensão, vapores e gases no ar da empresa."
+        },
+        {
+          "item": "11",
+          "referencia": "Ar-uso",
+          "requisito": "Ausência de fumaça preta excessiva provocada por empilhadeira e trator. (Escala Ringelman)"
+        },
+        {
+          "item": "12",
+          "referencia": "Água   descarte",
+          "requisito": "Ausência de descarte de resíduos contaminados em galerias pluviais."
+        },
+        {
+          "item": "13",
+          "referencia": "Água-uso",
+          "requisito": "Ausência de vazamentos em torneiras, canos, caixas..."
+        },
+        {
+          "item": "14",
+          "referencia": "Água-uso",
+          "requisito": "Ausência de desperdício no uso de água."
+        },
+        {
+          "item": "15",
+          "referencia": "Energia elétrica-uso",
+          "requisito": "Ausência de desperdício no uso de energia elétrica (lâmpadas acesas desnecessariamente, instalações mal feitas...)."
+        },
+        {
+          "item": "16",
+          "referencia": "Outros recursos-uso",
+          "requisito": "Ausência de disperdício no uso de outros recursos      ( glp, papel, copos...)."
+        },
+        {
+          "item": "17",
+          "referencia": "Pessoas",
+          "requisito": "Conhecimento sobre a sistemática de descartar resíduos."
+        },
+        {
+          "item": "18",
+          "referencia": "Pessoas",
+          "requisito": "Conscientização sobre questões ambientais."
+        },
+        {
+          "item": "19",
+          "referencia": "Embalagens e recipientes",
+          "requisito": "Caixas, tambores, bombonas de produtos quimicos, e outros recipientes para armazenamento de resíduos, estão bem identificados e em bom estado de conservação."
+        },
+        {
+          "item": "SELEÇÃO",
+          "referencia": "SELEÇÃO",
+          "requisito": "0"
+        },
+        {
+          "item": "RECEBIMENTO",
+          "referencia": "RECEBIMENTO",
+          "requisito": "0"
+        },
+        {
+          "item": "LOW RISK",
+          "referencia": "LOW RISK",
+          "requisito": "0"
+        },
+        {
+          "item": "HIGH CARE",
+          "referencia": "HIGH CARE",
+          "requisito": "2"
+        },
+        {
+          "item": "RESÍDUO",
+          "referencia": "RESÍDUO",
+          "requisito": "0"
+        },
+        {
+          "item": "ETIQUETA",
+          "referencia": "ETIQUETA",
+          "requisito": "0"
+        },
+        {
+          "item": "EXPEDIÇÃO",
+          "referencia": "EXPEDIÇÃO",
+          "requisito": "0"
+        },
+        {
+          "item": "ALMOXARIFADO",
+          "referencia": "ALMOXARIFADO",
+          "requisito": "0"
+        },
+        {
+          "item": "LAVANDERIA",
+          "referencia": "LAVANDERIA",
+          "requisito": "0"
+        },
+        {
+          "item": "MANUTENÇÃO",
+          "referencia": "MANUTENÇÃO",
+          "requisito": "1"
+        },
+        {
+          "item": "ETE/ETA",
+          "referencia": "ETE/ETA",
+          "requisito": "1"
+        },
+        {
+          "item": "ADMINISTRATIVOS",
+          "referencia": "ADMINISTRATIVOS",
+          "requisito": "1"
+        }
+      ]
+    },
+    {
+      "name": "AUDITORIA ST",
+      "departamentos": [
+        "SELECAO",
+        "RECEBIMENTO",
+        "LOW RISK",
+        "HIGH CARE",
+        "RESIDUO",
+        "ETIQUETA",
+        "EXPEDICAO",
+        "ALMOXARIFADO",
+        "LAVANDERIA",
+        "MANUTENCAO",
+        "ETE / ETA",
+        "ADMINISTRATIVOS"
+      ],
+      "itens": [
+        {
+          "item": "1",
+          "referencia": "Externo / NR-1 / NR-35",
+          "requisito": "Escadas móveis: As escadas móveis estão em boas condições de uso? (Escada móveis, de abrir, plataforma)"
+        },
+        {
+          "item": "2",
+          "referencia": "Externo / NR-1 / NR-35",
+          "requisito": "Escadas Marinheiro: Escadas marinheiros estão em boas condições e trancadas?"
+        },
+        {
+          "item": "3",
+          "referencia": "Externo / NR-1",
+          "requisito": "escadas fixas e guarda-corpo: As escadas fixas e guarda-corpo estão em boas condições?"
+        },
+        {
+          "item": "4",
+          "referencia": "Externo / NR-1",
+          "requisito": "Iluminação: O Sistema de iluminação está eficiente? Existem luminárias queimadas ou danificadas?"
+        },
+        {
+          "item": "5",
+          "referencia": "Externo / NR-1",
+          "requisito": "Prevenção de riscos: As caixas empilhadas são coladas corretamente para evitar o desabamento? (10/12)"
+        },
+        {
+          "item": "6",
+          "referencia": "Externo / NR-1",
+          "requisito": "Sistema de exaustão é suficiente e está funcionando corretamente?"
+        },
+        {
+          "item": "7",
+          "referencia": "NR-1",
+          "requisito": "Prevenção de riscos: Cumprindo as determinações e obrigações em relação a seg. (não correr, não brincar, não executar tarefas desautorizadas ou Desvios de segurança)."
+        },
+        {
+          "item": "8",
+          "referencia": "Externo / NR-6",
+          "requisito": "EPI's e EPC's : Utilização e conservação"
+        },
+        {
+          "item": "9",
+          "referencia": "NR-8",
+          "requisito": "Pisos adequados (ausência de buracos, depressões e saliências)."
+        },
+        {
+          "item": "10",
+          "referencia": "NR-8",
+          "requisito": "Aberturas em pisos e paredes: devem ser protegidas contra queda."
+        },
+        {
+          "item": "11",
+          "referencia": "NR-8",
+          "requisito": "Rampas e escadas fixas : De acordo com as normas e em  perfeitas condições."
+        },
+        {
+          "item": "12",
+          "referencia": "NR-8, NR-35",
+          "requisito": "Construções acima do solo : - guarda-corpo  de acordo com a especificação da NR."
+        },
+        {
+          "item": "13",
+          "referencia": "NR- 8",
+          "requisito": "Proteção Contra Intempéries (chuva)"
+        },
+        {
+          "item": "14",
+          "referencia": "NR-9",
+          "requisito": "Produtos químicos adequadamente fechados para evitar exposição dos colaboradores."
+        },
+        {
+          "item": "15",
+          "referencia": "Externo / NR-10 / NR-23",
+          "requisito": "Sala de Gerador: O Local deve estar limpo e organizado."
+        },
+        {
+          "item": "16",
+          "referencia": "Externo / NR-10 / NR-23",
+          "requisito": "Sala de Gerador: Verificar os tanques de diesel, verificação de contenção, mangueias, e vazamentos."
+        },
+        {
+          "item": "17",
+          "referencia": "Externo / NR-10 / NR-23",
+          "requisito": "Sala de Gerador: Verificar as condições e disponibilidade de extintores."
+        },
+        {
+          "item": "18",
+          "referencia": "Externo / NR-10",
+          "requisito": "Instalações elétricas: Não observados Fios e cabos elétricos com suas pontas expostas para o lado externo de conduletes elétricos."
+        },
+        {
+          "item": "19",
+          "referencia": "Externo / NR-10",
+          "requisito": "Instalações elétricas: Não observados Fios e cabos elétricos expostos em paredes ou sobre pisos, de forma irregular (fora de conduítes elétricos adequados)."
+        },
+        {
+          "item": "20",
+          "referencia": "Externo / NR-10",
+          "requisito": "Tomadas elétricas: Não observadas tomadas elétricas sem a tampa frontal, ou sem identificação quanto à respectiva tensão."
+        },
+        {
+          "item": "21",
+          "referencia": "Externo / NR-10",
+          "requisito": "Extensões: As extenções estão em boas condições, sem danos aparentes ou sem isolamento."
+        },
+        {
+          "item": "22",
+          "referencia": "Externo / NR-10",
+          "requisito": "Painéis de distribuição elétrica: Não observados Painéis de distribuição elétrica mantidos abertos."
+        },
+        {
+          "item": "23",
+          "referencia": "Externo / NR-10",
+          "requisito": "Painéis de distribuição elétrica: Não observados Painéis de distribuição elétrica sem identificação externa quanto à respectiva tensão."
+        },
+        {
+          "item": "24",
+          "referencia": "Externo / NR-10",
+          "requisito": "Painéis de distribuição elétrica: Não observados Painéis de distribuição elétrica com fechaduras danificadas."
+        },
+        {
+          "item": "25",
+          "referencia": "Externo / NR-10",
+          "requisito": "Painéis de distribuição elétrica: Não observados Painéis de distribuição elétrica com a ausência de botões de comando ou acionamento."
+        },
+        {
+          "item": "26",
+          "referencia": "Externo / NR-10",
+          "requisito": "Painéis de comando elétrico de máquinas e equipamentos: Não observados Painéis de comando elétrico: A) Danificados; B) Com ausência de botões de comando; C) Com botões sem identificação e D) Com lâmpadas de indicação \"queimadas\"."
+        },
+        {
+          "item": "27",
+          "referencia": "Externo / NR-10",
+          "requisito": "O método de bloqueio e etiqueta é usado antes de realizar qualquer manutenção nos equipamentos elétricos"
+        },
+        {
+          "item": "28",
+          "referencia": "Externo / NR-10",
+          "requisito": "Todos os funcionários que trabalham com aparelhos elétricos receberam treinamento elétrico adequado e isso já foi documentado. Treinamento NR10"
+        },
+        {
+          "item": "29",
+          "referencia": "Externo / NR-10",
+          "requisito": "É mantido dentro dos paineis elétricos o diagrama unifilar?"
+        },
+        {
+          "item": "30",
+          "referencia": "Externo / NR-10",
+          "requisito": "Ferramentas isoladas são usadas quando necessário? Estão em boas condições."
+        },
+        {
+          "item": "31",
+          "referencia": "Externo / NR-10",
+          "requisito": "Tapetes e barras estão com testes de isolamento válido?"
+        },
+        {
+          "item": "32",
+          "referencia": "Externo / NR-06; NR-10",
+          "requisito": "EPI´s: Não observada a indisponibilidade de EPI´s para atividades no interior da subestação elétrica."
+        },
+        {
+          "item": "33",
+          "referencia": "Externo / NR-06; NR-10",
+          "requisito": "EPI´s: Não observados EPI´s para a utilização em atividades no interior da subestação elétrica, com CA´s vencidos. Ou testes dielétrico vencido."
+        },
+        {
+          "item": "34",
+          "referencia": "Externo / NR-10",
+          "requisito": "Treinamentos - NR-10: Não observadas pendências de treinamentos ou vencimento de suas respectivas reciclagens aos profissionais eletricistas."
+        },
+        {
+          "item": "35",
+          "referencia": "NR-11",
+          "requisito": "Empilhadeira : O op. de empilhadeira deverá portar  o crachá e atualizado."
+        },
+        {
+          "item": "36",
+          "referencia": "NR-11",
+          "requisito": "Sinalização : os equipamentos de transporte deverão possuir advertência sonora (buzina)."
+        },
+        {
+          "item": "37",
+          "referencia": "NR-11",
+          "requisito": "Armazenamento: não deverá obstruir portas, equipamentos contra incêndio, saídas de emergência,etc."
+        },
+        {
+          "item": "38",
+          "referencia": "Externo / NR-11",
+          "requisito": "Empilhamento irregular de pallets, caixas, e outros itens que possam provocar sua queda, com consequentes acidentes do trabalho ou danificação dos produtos contidos em seu interior"
+        },
+        {
+          "item": "39",
+          "referencia": "NR-11",
+          "requisito": "Estado de conservação de prateleiras e proteções contra impacto."
+        },
+        {
+          "item": "40",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Sinais de desgaste dos pneus"
+        },
+        {
+          "item": "41",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: O sistema de iluminação, lâmpada quebrada."
+        },
+        {
+          "item": "42",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Bateria/terminal/cabo em bom estado."
+        },
+        {
+          "item": "43",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Torre, garfos e mangueiras hidráulicas."
+        },
+        {
+          "item": "44",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Alarme de ré em boas condições de funcionamento."
+        },
+        {
+          "item": "45",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Cinto de segurança em boas condições."
+        },
+        {
+          "item": "46",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Luzes de aviso em boas condições."
+        },
+        {
+          "item": "47",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Funcionamento dos Freios."
+        },
+        {
+          "item": "48",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Vazamentos de óleo ou fluídos."
+        },
+        {
+          "item": "49",
+          "referencia": "Externo / NR-11",
+          "requisito": "EMPILHADEIRAS - NR-11: Condições do volante, chave, painel, acionadores, etc."
+        },
+        {
+          "item": "50",
+          "referencia": "Externo / NR-11",
+          "requisito": "PALETEIRAS: As paleteiras estão em boas condições operacionais?"
+        },
+        {
+          "item": "51",
+          "referencia": "Externo / NR-11",
+          "requisito": "Verificação do acúmulo de palhetes danificados para descarte."
+        },
+        {
+          "item": "52",
+          "referencia": "Externo / NR-11",
+          "requisito": "Está sendo respeitado a altura máxima de empilhamento de paletes vazios? 25 unidades"
+        },
+        {
+          "item": "53",
+          "referencia": "NR-12.2.1",
+          "requisito": "a)Dispositivo de Seg. Máq./Equip.: Deverá ser Acionado ou desligado pelo operador na sua posição de trabalho.  Tambem botão de emergência (quando aplicável)"
+        },
+        {
+          "item": "54",
+          "referencia": "NR-12.2.1",
+          "requisito": "d) Comandos de acionamentos/chave geral de Máq. /Equip: não devem ser acionados ou desligado, involuntariamente, pelo operador, ou de qualquer outra forma acidental."
+        },
+        {
+          "item": "55",
+          "referencia": "NR-12.3.1",
+          "requisito": "Máquinas / Equipamentos : devem ter proteções nas suas transmissões de energia elétrica e devidamente isoladas."
+        },
+        {
+          "item": "56",
+          "referencia": "NR-12.3.2",
+          "requisito": "Nas transmissões de forças : quando estiverem a uma altura de 2,50m, podem ficar expostas, exceto nos casos de plataforma de trabalho."
+        },
+        {
+          "item": "57",
+          "referencia": "Externo / NR-12",
+          "requisito": "Máquinas e equipamentos: Todos os dispositivos de proteção estão em boas condições e devidamente fixados?  (Descascadoras, tombadores de resíduos, etc)"
+        },
+        {
+          "item": "58",
+          "referencia": "Externo / NR-12",
+          "requisito": "Máquinas e equipamentos: Os botões de controle de para/partida estão claramente identificados?  (Descascadoras, tombadores de resíduos, etc)"
+        },
+        {
+          "item": "59",
+          "referencia": "Externo / NR-12",
+          "requisito": "Máquinas e equipamentos: As máquinas estão bom funcionamento? (Descascadoras, tombadores de resíduos, etc)"
+        },
+        {
+          "item": "60",
+          "referencia": "Externo / NR-12",
+          "requisito": "Máquinas e equipamentos: Os operadores de máquinas são devidamente treinados?"
+        },
+        {
+          "item": "61",
+          "referencia": "Externo / NR-12 / NR-1",
+          "requisito": "Máquinas e equipamentos: Os carrinhos para movimentação de caixas estão em boas condições?"
+        },
+        {
+          "item": "62",
+          "referencia": "Externo / NR-13",
+          "requisito": "Os vasos de pressão (PV) são identificados por números de série?"
+        },
+        {
+          "item": "63",
+          "referencia": "Externo / NR-13",
+          "requisito": "Mecanismos de alívio de pressão estão instalados?"
+        },
+        {
+          "item": "64",
+          "referencia": "Externo / NR-13",
+          "requisito": "Os vasos de pressão estão posicionados com segurança?"
+        },
+        {
+          "item": "65",
+          "referencia": "Externo / NR-17",
+          "requisito": "Cadeiras ergonômicas, apoios de pés, mãos, tela, etc, estão em boas condições."
+        },
+        {
+          "item": "66",
+          "referencia": "Externo / NR-20",
+          "requisito": "O transporte dos cilindros Oxigênio, Acetileno, Argônio e GLP : deverão ser realizados em carrinhos adequados."
+        },
+        {
+          "item": "67",
+          "referencia": "Externo / NR-20",
+          "requisito": "Cilindros de gases: Os cilindros fora de uso estão com o capacete de proteção instalado?"
+        },
+        {
+          "item": "68",
+          "referencia": "Externo / NR-20",
+          "requisito": "Cilindros de gases: Os cilindros cheios separados dos vazios."
+        },
+        {
+          "item": "69",
+          "referencia": "Externo / NR-20",
+          "requisito": "Instalações de gases com valvulas corta fogo nas extremidades das mangueiras."
+        },
+        {
+          "item": "70",
+          "referencia": "Externo / NR-20",
+          "requisito": "Maçaricos: Verificar as condições gerais dos maçaricos, como: manômetros, válvulas corta fogo, mangueiras, bico, regulador, travamento do cilindro, etc."
+        },
+        {
+          "item": "71",
+          "referencia": "Externo / NR-20",
+          "requisito": "Cilindros de gases: Existe um depósito de cilindros bem projetado? (afastamento seguro, inexistencia de ralos ou galerias, travamento seguro dos cilindros)"
+        },
+        {
+          "item": "72",
+          "referencia": "Externo / NR-23",
+          "requisito": "Os hidrantes estão em perfeito funcionamento."
+        },
+        {
+          "item": "73",
+          "referencia": "Externo / NR-23",
+          "requisito": "Pressão da água nos hidrantes. Alcance minimo do jato da água deve ser de 10 metros."
+        },
+        {
+          "item": "74",
+          "referencia": "Externo / NR-23",
+          "requisito": "Equip. de combate à incêndio estão nos locais designados."
+        },
+        {
+          "item": "75",
+          "referencia": "Externo / NR-23",
+          "requisito": "Equip. de combate à incêndio e saídas de emergências deverão estar desobstruídos."
+        },
+        {
+          "item": "76",
+          "referencia": "Externo / NR-23",
+          "requisito": "Os extintores, hidrantes e botoeiras estão sinalizados."
+        },
+        {
+          "item": "77",
+          "referencia": "Externo / NR-23",
+          "requisito": "Os extintores, estão carregados e dentro da validade."
+        },
+        {
+          "item": "78",
+          "referencia": "Externo / NR-23",
+          "requisito": "Os extintores encontram-se dentro dos prazos de carregamento, teste hidrostático e em boas condições."
+        },
+        {
+          "item": "79",
+          "referencia": "Externo / NR-23",
+          "requisito": "As caixas de mangueiras possuem mangueiras, chave universal e esguicho em bom estado físico."
+        },
+        {
+          "item": "80",
+          "referencia": "Externo / NR-23",
+          "requisito": "O Alarme de incêndio e central de alarmes deve estar funcionando corretamente."
+        },
+        {
+          "item": "81",
+          "referencia": "Externo / NR-23",
+          "requisito": "Verificação do ponto de encontro. Deve estar visível e em boas condições."
+        },
+        {
+          "item": "82",
+          "referencia": "Externo / NR-23",
+          "requisito": "Luz de emergência : deverão estar instaladas nos acessos de corredores e saídas de emergências e devem estar funcionando adequadamente."
+        },
+        {
+          "item": "83",
+          "referencia": "Externo / NR-20 / NR-23",
+          "requisito": "Os produtos inflamáveis devem estar acondicionados de forma adequada e segura. (Armário corta fogo)"
+        },
+        {
+          "item": "84",
+          "referencia": "Externo / NR-20 / NR-23",
+          "requisito": "Os produtos inflamáveis possuem identificação adequada."
+        },
+        {
+          "item": "85",
+          "referencia": "NR-24",
+          "requisito": "Instalações sanitárias adequadas , limpas e conservadas."
+        },
+        {
+          "item": "86",
+          "referencia": "Externo / NR-26",
+          "requisito": "Sinalizações de Segurança: Presentes, adequadas e conservadas."
+        },
+        {
+          "item": "87",
+          "referencia": "Externo / NR-1",
+          "requisito": "Observado outras condições de riscos?"
+        },
+        {
+          "item": "SELEÇÃO",
+          "referencia": "SELEÇÃO",
+          "requisito": "16"
+        },
+        {
+          "item": "RECEBIMENTO",
+          "referencia": "RECEBIMENTO",
+          "requisito": "3"
+        },
+        {
+          "item": "LOW RISK",
+          "referencia": "LOW RISK",
+          "requisito": "3"
+        },
+        {
+          "item": "HIGH CARE",
+          "referencia": "HIGH CARE",
+          "requisito": "11"
+        },
+        {
+          "item": "RESÍDUO",
+          "referencia": "RESÍDUO",
+          "requisito": "2"
+        },
+        {
+          "item": "ETIQUETA",
+          "referencia": "ETIQUETA",
+          "requisito": "6"
+        },
+        {
+          "item": "EXPEDIÇÃO",
+          "referencia": "EXPEDIÇÃO",
+          "requisito": "1"
+        },
+        {
+          "item": "ALMOXARIFADO",
+          "referencia": "ALMOXARIFADO",
+          "requisito": "7"
+        },
+        {
+          "item": "LAVANDERIA",
+          "referencia": "LAVANDERIA",
+          "requisito": "2"
+        },
+        {
+          "item": "MANUTENÇÃO",
+          "referencia": "MANUTENÇÃO",
+          "requisito": "5"
+        },
+        {
+          "item": "ETE / ETA",
+          "referencia": "ETE / ETA",
+          "requisito": "5"
+        },
+        {
+          "item": "ADMINISTRATIVOS",
+          "referencia": "ADMINISTRATIVOS",
+          "requisito": "3"
+        }
+      ]
+    }
+  ]
+}
