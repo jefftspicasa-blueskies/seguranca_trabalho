@@ -763,27 +763,27 @@ def render_header() -> None:
         }
         .brand-hero {
             display: flex;
-            gap: 18px;
+            gap: 14px;
             align-items: center;
             background: linear-gradient(120deg, #ffffff 0%, #f4f9ff 52%, #eaf4ff 100%);
             border: 1px solid #d5e5f7;
             border-left: 8px solid var(--bs-blue-700);
             border-radius: 16px;
-            padding: 14px 18px;
-            margin: 0.1rem 0 0.9rem 0;
+            padding: 10px 14px;
+            margin: 0.1rem 0 0.65rem 0;
             box-shadow: 0 8px 24px rgba(9, 54, 91, 0.08);
         }
         .brand-logo-wrap {
-            width: 88px;
-            height: 88px;
-            flex: 0 0 88px;
+            width: 64px;
+            height: 64px;
+            flex: 0 0 64px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             background: #ffffff;
-            border: 3px solid #d4e6fa;
-            box-shadow: 0 4px 14px rgba(17, 119, 204, 0.2);
+            border: 2px solid #d4e6fa;
+            box-shadow: 0 3px 10px rgba(17, 119, 204, 0.16);
             overflow: hidden;
         }
         .brand-logo-wrap img {
@@ -792,17 +792,34 @@ def render_header() -> None:
             object-fit: cover;
         }
         .brand-title {
-            font-size: 1.95rem;
+            font-size: 1.35rem;
             font-weight: 800;
             color: var(--bs-blue-900);
-            line-height: 1.15;
+            line-height: 1.2;
             margin: 0;
         }
         .brand-subtitle {
-            margin-top: 0.35rem;
+            margin-top: 0.2rem;
             color: #3e5570;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 500;
+        }
+        @media (max-width: 900px) {
+            .brand-hero {
+                gap: 10px;
+                padding: 9px 11px;
+            }
+            .brand-logo-wrap {
+                width: 54px;
+                height: 54px;
+                flex-basis: 54px;
+            }
+            .brand-title {
+                font-size: 1.1rem;
+            }
+            .brand-subtitle {
+                font-size: 0.82rem;
+            }
         }
         .pdf-title {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
