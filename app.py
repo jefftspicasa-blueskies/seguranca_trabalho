@@ -10,7 +10,7 @@ from typing import Any
 
 import pandas as pd
 import streamlit as st
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text as sa_text
 from sqlalchemy.engine import Engine
 from sqlalchemy.engine import URL
 
@@ -61,32 +61,27 @@ def get_db_url() -> str:
     except Exception:
         pass
 
-    user = str(secret_user or os.getenv("AUDITORIA_DB_USER", "postgres"))
-    password = str(secret_pass or os.getenv("AUDITORIA_DB_PASS", "AApgKSLEDBJzbYaMiNCGVaXcisiIXrII"))
-    host = str(secret_host or os.getenv("AUDITORIA_DB_HOST", "tokaido.proxy.rlwy.net"))
-    port = int(secret_port or os.getenv("AUDITORIA_DB_PORT", "27106"))
-    database = str(secret_db or os.getenv("AUDITORIA_DB_NAME", "railway"))
+    user = str(secret_user or os.getenv("AUDITORIA_DB_USER", "")).strip()
+    password = str(secret_pass or os.getenv("AUDITORIA_DB_PASS", "")).strip()
+    host = str(secret_host or os.getenv("AUDITORIA_DB_HOST", "")).strip()
+    port_raw = str(secret_port or os.getenv("AUDITORIA_DB_PORT", "")).strip()
+    database = str(secret_db or os.getenv("AUDITORIA_DB_NAME", "")).strip()
 
-    has_explicit_components = any(
-        [
-            secret_user,
-            secret_pass,
-            secret_host,
-            secret_port,
-            secret_db,
-            os.getenv("AUDITORIA_DB_USER"),
-            os.getenv("AUDITORIA_DB_PASS"),
-            os.getenv("AUDITORIA_DB_HOST"),
-            os.getenv("AUDITORIA_DB_PORT"),
-            os.getenv("AUDITORIA_DB_NAME"),
-        ]
-    )
-
-    # Se AUDITORIA_DB_URL estiver definido e nao houver componentes separados, usa fallback.
     db_url_env = os.getenv("AUDITORIA_DB_URL")
     db_url = str(secret_url or db_url_env or "").strip()
-    if db_url and not has_explicit_components:
-        return db_url.replace("postgres://", "postgresql://", 1)
+    if db_url:
+        if db_url.startswith("postgres://"):
+            return db_url.replace("postgres://", "postgresql+pg8000://", 1)
+        if db_url.startswith("postgresql://"):
+            return db_url.replace("postgresql://", "postgresql+pg8000://", 1)
+        return db_url
+
+    if not all([user, password, host, port_raw, database]):
+        # Fallback local para desenvolvimento quando variaveis de ambiente nao estao definidas.
+        sqlite_path = BASE_DIR / "auditorias.db"
+        return f"sqlite:///{sqlite_path.as_posix()}"
+
+    port = int(port_raw)
 
     url = URL.create(
         drivername="postgresql+pg8000",
@@ -99,9 +94,48 @@ def get_db_url() -> str:
     return url.render_as_string(hide_password=False)
 
 
+_DB_URL_CACHE: str | None = None
+
+
+def _cached_db_url() -> str:
+    global _DB_URL_CACHE
+    if not _DB_URL_CACHE:
+        _DB_URL_CACHE = get_db_url()
+    return _DB_URL_CACHE
+
+
+def _is_sqlite_mode() -> bool:
+    return _cached_db_url().startswith("sqlite:///")
+
+
+def _adapt_sql_for_sqlite(query: str) -> str:
+    sql = str(query)
+    if "CREATE SCHEMA IF NOT EXISTS TRUSTED" in sql.upper():
+        return "SELECT 1"
+
+    replacements = [
+        ("trusted.", ""),
+        ("NOW()", "CURRENT_TIMESTAMP"),
+        ("BIGSERIAL PRIMARY KEY", "INTEGER PRIMARY KEY AUTOINCREMENT"),
+        ("BIGINT", "INTEGER"),
+        ("BOOLEAN", "INTEGER"),
+    ]
+
+    for old, new in replacements:
+        sql = sql.replace(old, new)
+
+    return sql
+
+
+def text(query: str):
+    if _is_sqlite_mode():
+        return sa_text(_adapt_sql_for_sqlite(query))
+    return sa_text(query)
+
+
 @st.cache_resource(show_spinner=False)
 def get_engine() -> Engine:
-    return create_engine(get_db_url(), pool_pre_ping=True)
+    return create_engine(_cached_db_url(), pool_pre_ping=True)
 
 
 def ensure_db_schema(engine: Engine) -> None:
@@ -708,73 +742,155 @@ def render_header() -> None:
     st.markdown(
         """
         <style>
+        :root {
+            --bs-blue-900: #0a3d62;
+            --bs-blue-700: #1177cc;
+            --bs-blue-600: #1f8be0;
+            --bs-blue-100: #e8f3ff;
+            --bs-bg: #eef2f7;
+            --bs-card: #ffffff;
+            --bs-text: #182230;
+        }
         [data-testid="stAppViewContainer"] {
-            background: #e6e6e6;
+            background: radial-gradient(circle at 0% 0%, #f7fbff 0%, var(--bs-bg) 42%, #e6ecf3 100%);
         }
         [data-testid="stHeader"] {
             background: transparent;
         }
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #f5f9ff 0%, #eef5ff 100%);
+            border-right: 1px solid #dbe7f6;
+        }
+        .brand-hero {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            background: linear-gradient(120deg, #ffffff 0%, #f4f9ff 52%, #eaf4ff 100%);
+            border: 1px solid #d5e5f7;
+            border-left: 8px solid var(--bs-blue-700);
+            border-radius: 16px;
+            padding: 14px 18px;
+            margin: 0.1rem 0 0.9rem 0;
+            box-shadow: 0 8px 24px rgba(9, 54, 91, 0.08);
+        }
+        .brand-logo-wrap {
+            width: 88px;
+            height: 88px;
+            flex: 0 0 88px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #d4e6fa;
+            box-shadow: 0 4px 14px rgba(17, 119, 204, 0.2);
+            overflow: hidden;
+        }
+        .brand-logo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .brand-title {
+            font-size: 1.95rem;
+            font-weight: 800;
+            color: var(--bs-blue-900);
+            line-height: 1.15;
+            margin: 0;
+        }
+        .brand-subtitle {
+            margin-top: 0.35rem;
+            color: #3e5570;
+            font-size: 1rem;
+            font-weight: 500;
+        }
         .pdf-title {
-            font-family: "Times New Roman", serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #111;
-            margin: 0.25rem 0 1rem 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--bs-blue-900);
+            margin: 0.1rem 0 0.9rem 0;
         }
         .pdf-subtitle {
-            font-family: "Times New Roman", serif;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
-            color: #111;
+            color: var(--bs-blue-900);
             margin: 0;
         }
         .ux-chip {
-            background: #ffffff;
-            border: 1px solid #d0d0d0;
+            background: #f4faff;
+            border: 1px solid #c9def6;
             border-radius: 10px;
             padding: 0.5rem 0.75rem;
             font-weight: 600;
-            color: #0a3d62;
+            color: var(--bs-blue-900);
             display: inline-block;
             margin-bottom: 0.5rem;
         }
         .ux-card {
-            background: #ffffff;
-            border: 1px solid #d8d8d8;
-            border-left: 6px solid #1177cc;
+            background: var(--bs-card);
+            border: 1px solid #d8e5f4;
+            border-left: 6px solid var(--bs-blue-700);
             border-radius: 12px;
             padding: 0.9rem 1rem;
             margin: 0.4rem 0;
+            box-shadow: 0 4px 12px rgba(21, 57, 86, 0.06);
         }
         .ux-label {
-            color: #3a3a3a;
+            color: #4f5f73;
             font-size: 0.85rem;
             margin-bottom: 0.1rem;
         }
         .ux-value {
-            color: #111;
+            color: var(--bs-text);
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 0.35rem;
         }
         .ux-req {
-            color: #111;
+            color: var(--bs-text);
             font-size: 1.08rem;
             font-weight: 700;
             margin-top: 0.35rem;
         }
         .ux-title {
-            color: #111;
+            color: var(--bs-blue-900);
             font-size: 1rem;
             font-weight: 700;
             margin-bottom: 0.35rem;
         }
         .ux-desc {
-            color: #222;
+            color: #243447;
             font-size: 0.98rem;
             font-weight: 400;
             margin-top: 0.1rem;
             margin-bottom: 0.35rem;
+        }
+        .ux-menu-note {
+            background: #f3f9ff;
+            border: 1px dashed #b8d5f5;
+            border-radius: 10px;
+            color: #284460;
+            padding: 0.55rem 0.7rem;
+            font-size: 0.92rem;
+            margin: 0.25rem 0 0.75rem 0;
+        }
+        div[data-testid="stMetric"] {
+            background: #ffffff;
+            border: 1px solid #dae8f8;
+            border-radius: 12px;
+            padding: 0.45rem 0.7rem;
+        }
+        div[data-testid="stButton"] > button {
+            border-radius: 10px;
+            border: 1px solid #b8d3f0;
+            font-weight: 600;
+        }
+        div[data-testid="stButton"] > button[kind="primary"] {
+            background: linear-gradient(135deg, var(--bs-blue-700), var(--bs-blue-600));
+            border: 0;
+            color: #fff;
         }
         div[data-testid="stRadio"] [role="radiogroup"] {
             display: flex;
@@ -813,7 +929,20 @@ def render_header() -> None:
         """,
         unsafe_allow_html=True,
     )
-    st.markdown(f"<div class='pdf-title'>{APP_TITLE}</div>", unsafe_allow_html=True)
+    st.markdown(
+        f"""
+        <div class="brand-hero">
+            <div class="brand-logo-wrap">
+                <img src="{LOGO_URL}" alt="Blue Skies" />
+            </div>
+            <div>
+                <h1 class="brand-title">{APP_TITLE}</h1>
+                <div class="brand-subtitle">Fluxo simples e guiado para registro, analise e acompanhamento das auditorias.</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def get_tipo_badge(tipo: str) -> str:
@@ -1005,7 +1134,7 @@ def validate_before_save(numero: str, df: pd.DataFrame) -> tuple[bool, str]:
 def render_tipo_menu(engine: Engine, template: SheetTemplate) -> None:
     tipo = template.name
     st.markdown(f"<span class='ux-chip'>Tipo: {get_tipo_badge(tipo)}</span>", unsafe_allow_html=True)
-    st.subheader(f"Painel de auditorias: {tipo}")
+    st.subheader(f"Painel operacional: {tipo}")
 
     analyses = list_analyses_by_type(engine, tipo)
     render_analyses_kpis(analyses)
@@ -1015,7 +1144,7 @@ def render_tipo_menu(engine: Engine, template: SheetTemplate) -> None:
         filtro_numero = st.text_input(
             "Buscar por numero",
             value="",
-            placeholder="Ex.: 2026-07-001",
+            placeholder="Ex.: ST-2026-001",
             key=f"filtro_numero_{tipo}",
         ).strip()
     with top_r:
@@ -1047,7 +1176,7 @@ def render_tipo_menu(engine: Engine, template: SheetTemplate) -> None:
 
         p1, p2, p3 = st.columns([1, 2, 1])
         with p1:
-            if st.button("Pagina anterior", key=f"analyses_prev_{tipo}", disabled=st.session_state[page_key] <= 1, use_container_width=True):
+            if st.button("Anterior", key=f"analyses_prev_{tipo}", disabled=st.session_state[page_key] <= 1, use_container_width=True):
                 st.session_state[page_key] -= 1
                 st.rerun()
         with p2:
@@ -1065,7 +1194,7 @@ def render_tipo_menu(engine: Engine, template: SheetTemplate) -> None:
                 st.session_state[page_key] = pag
                 st.rerun()
         with p3:
-            if st.button("Proxima pagina", key=f"analyses_next_{tipo}", disabled=st.session_state[page_key] >= total_paginas, use_container_width=True):
+            if st.button("Proxima", key=f"analyses_next_{tipo}", disabled=st.session_state[page_key] >= total_paginas, use_container_width=True):
                 st.session_state[page_key] += 1
                 st.rerun()
 
@@ -1073,7 +1202,7 @@ def render_tipo_menu(engine: Engine, template: SheetTemplate) -> None:
         end = min(start + por_pagina, total)
         page_df = analyses.iloc[start:end]
 
-        st.caption(f"Exibindo analises {start + 1} a {end} de {total}")
+        st.caption(f"Exibindo registros {start + 1} a {end} de {total}")
 
         for _, row in page_df.iterrows():
             analise_id = int(row["id"])
@@ -1098,11 +1227,11 @@ def render_tipo_menu(engine: Engine, template: SheetTemplate) -> None:
                 unsafe_allow_html=True,
             )
 
-            if st.button(f"Abrir analise {numero}", key=f"open_card_{tipo}_{analise_id}", use_container_width=True):
+            if st.button(f"Abrir registro {numero}", key=f"open_card_{tipo}_{analise_id}", use_container_width=True):
                 open_existing_analysis(engine, template, analise_id)
                 st.rerun()
 
-    if st.button("Iniciar nova analise", key=f"new_{tipo}", type="primary", use_container_width=True):
+    if st.button("Nova analise", key=f"new_{tipo}", type="primary", use_container_width=True):
         reset_editor_state(tipo)
         st.session_state[f"active_numero_{tipo}"] = ""
         st.session_state[f"active_data_{tipo}"] = date.today()
@@ -1110,7 +1239,7 @@ def render_tipo_menu(engine: Engine, template: SheetTemplate) -> None:
         st.session_state[f"screen_{tipo}"] = "editor"
         st.rerun()
 
-    if st.button("Abrir dashboard de analises", key=f"dashboard_{tipo}", use_container_width=True):
+    if st.button("Ver dashboard", key=f"dashboard_{tipo}", use_container_width=True):
         st.session_state[f"screen_{tipo}"] = "dashboard"
         st.rerun()
 
@@ -1151,7 +1280,7 @@ def render_dashboard_screen(engine: Engine, template: SheetTemplate) -> None:
     c4.metric("Nao conformes (N)", total_n)
     c5.metric("Taxa de conformidade", f"{taxa_conformidade}%")
 
-    st.markdown("### Evolucao por data")
+    st.markdown("### Evolucao das auditorias")
     if not serie_df.empty:
         serie_df = serie_df.fillna(0)
         serie_df["data_auditoria"] = pd.to_datetime(serie_df["data_auditoria"])
@@ -1159,7 +1288,7 @@ def render_dashboard_screen(engine: Engine, template: SheetTemplate) -> None:
 
         chart_cols = st.columns(2)
         with chart_cols[0]:
-            st.caption("Analises por data")
+            st.caption("Total de analises por data")
             st.line_chart(serie_df.set_index("data_auditoria")[["analises"]])
         with chart_cols[1]:
             st.caption("Classificacoes por data (S/N/NA)")
@@ -1209,7 +1338,7 @@ def render_editor_screen(engine: Engine, template: SheetTemplate) -> None:
             "Numero da analise",
             value=st.session_state.get(f"active_numero_{tipo}", ""),
             key=f"numero_input_{tipo}",
-            placeholder="Ex.: 2026-07-001",
+            placeholder="Ex.: ST-2026-001",
         ).strip()
     with meta_col_2:
         data_auditoria = st.date_input(
@@ -1269,14 +1398,14 @@ def render_editor_screen(engine: Engine, template: SheetTemplate) -> None:
 
     action_l, action_r = st.columns([3, 2])
     with action_l:
-        if st.button("Salvar analise", type="primary", use_container_width=True, key=f"save_{tipo}"):
+        if st.button("Salvar", type="primary", use_container_width=True, key=f"save_{tipo}"):
             ok, msg = save_current_analysis(engine, template, numero, data_auditoria, df)
             if ok:
                 st.success(msg)
             else:
                 st.error(msg)
     with action_r:
-        if st.button("Salvar e voltar ao menu", use_container_width=True, key=f"save_back_{tipo}"):
+        if st.button("Salvar e voltar", use_container_width=True, key=f"save_back_{tipo}"):
             ok, msg = save_current_analysis(engine, template, numero, data_auditoria, df)
             if ok:
                 st.success(msg)
@@ -1305,8 +1434,12 @@ def main() -> None:
     template_map = {t.name: t for t in templates}
     tipos = list(template_map.keys())
 
-    st.markdown("### Menu inicial")
-    tipo_selecionado = st.selectbox("Selecione o tipo de auditoria", options=tipos)
+    st.markdown("<div class='pdf-subtitle'>Menu inicial</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='ux-menu-note'><b>Fluxo recomendado:</b> selecione o tipo, abra um registro existente ou crie um novo, classifique por area e finalize no botao de salvamento.</div>",
+        unsafe_allow_html=True,
+    )
+    tipo_selecionado = st.selectbox("Selecione o tipo de auditoria", options=tipos, help="Escolha a frente para visualizar menu, dashboard e editor.")
 
     screen_key = f"screen_{tipo_selecionado}"
     if screen_key not in st.session_state:
